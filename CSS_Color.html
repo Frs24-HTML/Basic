@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CSS COLOR</title>
+  <style>
+  body{
+    align-item: center;
+  }
+    .color-picker {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    .color-slider {
+      width: 250px;
+      align-item:center;
+      box-sizing:border-box;
+    }
+
+    .color-box {
+      width: 350px;
+      height: 400px;
+      margin-top: 20px;
+      border: 1px solid #000;
+      transition: background-color 0.3s ease;
+    }
+
+    .color-code {
+      margin-top: 20px;
+      color:#000;
+      font-weight:600;
+      border-radius:20px;
+    }
+  </style>
+</head>
+<body>
+  <audio autoplay>
+    <source src="audio.mp3" type="audio/sound.mp3">jsjjeusjs </audio>
+  <div class="color-picker">
+    <div class="color-slider">
+      <label for="red-slider">Merah:</label>
+      <input type="range" id="red-slider" min="0" max="255" value="0">
+      <br>
+      <label for="green-slider">Hijau:</label>
+      <input type="range" id="green-slider" min="0" max="255" value="0">
+      <br>
+      <label for="blue-slider">Biru:</label>
+      <input type="range" id="blue-slider" min="0" max="255" value="0">
+    </div>
+    <div class="color-box"></div>
+    <div class="color-code">
+      <label for="rgb-code-input">RGB Code:</label>
+      <input type="text" id="rgb-code-input">
+      <br><br>
+      <label for="hex-code-input">Hex Code:</label>
+      <input type="text" id="hex-code-input">
+    </div>
+  </div>
+  
+  <script>
+    var redSlider = document.getElementById('red-slider');
+    var greenSlider = document.getElementById('green-slider');
+    var blueSlider = document.getElementById('blue-slider');
+    var colorBox = document.querySelector('.color-box');
+    var rgbCodeInput = document.getElementById('rgb-code-input');
+    var hexCodeInput = document.getElementById('hex-code-input');
+    var copyButton = document.getElementById('copy-button');
+
+    function updateColor() {
+      var redValue = redSlider.value;
+      var greenValue = greenSlider.value;
+      var blueValue = blueSlider.value;
+      var rgbValue = 'rgb(' + redValue + ', ' + greenValue + ', ' + blueValue + ')';
+      var hexValue = rgbToHex(redValue, greenValue, blueValue);
+      colorBox.style.backgroundColor = rgbValue;
+      rgbCodeInput.value = rgbValue;
+      hexCodeInput.value = hexValue;
+    }
+
+    function copyColorCode() {
+      var activeInput = document.activeElement;
+      activeInput.select();
+      activeInput.setSelectionRange(0, 99999);
+      document.execCommand('copy');
+      alert('Color code copied: ' + activeInput.value);
+    }
+
+    function rgbToHex(red, green, blue) {
+      var r = parseInt(red).toString(16).padStart(2, '0');
+      var g = parseInt(green).toString(16).padStart(2, '0');
+      var b = parseInt(blue).toString(16).padStart(2, '0');
+      return '#' + r + g + b;
+    }
+
+    redSlider.addEventListener('input', updateColor);
+    greenSlider.addEventListener('input', updateColor);
+    blueSlider.addEventListener('input', updateColor);
+    rgbCodeInput.addEventListener('click', copyColorCode);
+    hexCodeInput.addEventListener('click', copyColorCode);
+    copyButton.addEventListener('click', copyColorCode);
+    colorBox.style.backgroundColor = rgbValue;
+    
+  </script>
+</body>
+</html>
