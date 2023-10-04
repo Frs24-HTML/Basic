@@ -48,8 +48,7 @@ int main(int argc, char *argv[])
 		SDL_Event event;
 		while (SDL_PollEvent(&event))
 		{
-			// Process events so the app doesn't hang
-		}
+			// proses agar aplikasi tidak hang
 	}
 	Mix_FreeMusic(music);
 	Mix_CloseAudio();
